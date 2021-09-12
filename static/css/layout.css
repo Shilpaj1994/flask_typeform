@@ -1,0 +1,23 @@
+.container-layout {
+    width: 100vw;
+    height: 100vh;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 100px 1fr;
+
+    gap: 0px;
+
+    padding: 0px;
+    box-sizing: border-box;
+    margin: 0;
+}
+
+.container-layout div {
+    padding: 0px;
+}
+
+.container-layout {
+    grid-column-start: 1;
+    grid-column-end: 4;
+}

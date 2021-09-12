@@ -1,0 +1,16 @@
+{% extends 'base_out.html' %}
+
+{% block content %}
+<br/><br/>
+
+<h1>{{ message }}</h1>
+
+<!--    <form method="post" action="/">-->
+<!--        <button type="button" class="btn btn-primary">Create a New Form</button>-->
+<!--    </form>-->
+
+<form action="{{ url_for('base_new_form') }}" method="POST">
+    <input type="submit" value="Create a New Form"/>
+</form>
+
+{% endblock %}

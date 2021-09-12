@@ -1,0 +1,8 @@
+1. What's your first name?
+2. And your last name?
+3. What's the main thing you'll be using TypeForm for?
+4. What industry are you in?
+5. What size is your organization?
+6. Which of these best descrives your role?
+7. What's the one main activity you want to do with TypeForm?
+8. And how did you first discover Typeform?

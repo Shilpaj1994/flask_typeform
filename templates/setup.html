@@ -1,0 +1,21 @@
+{% extends 'base_out.html' %}
+
+{% block content %}
+<br/><br/>
+
+<form action="/setup" method="POST">
+    <div align="center"><h3>{{ question }}</h3></div>
+
+    <br/>
+
+    {% if answer_type == "string" %}
+    <div class="mb-3">
+        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder={{
+               placeholder_data }} name={{ placeholder_data }} value="{{first_name}}">
+    </div>
+
+    {% endif %}
+</form>
+
+
+{% endblock %}

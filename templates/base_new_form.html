@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Shilpaj</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <link href="{{ url_for('static', filename='css/style.css')}}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/cards.css')}}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/rating.css')}}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/layout.css')}}" rel="stylesheet">
+    <link rel=”stylesheet” href=”http://netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css”>
+    <link href=”css/bootstrap-switch/bootstrap-switch.css” rel=”stylesheet”>
+
+</head>
+
+
+<body>
+
+
+<!-- Navigation Bar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{{ url_for('workspace') }}">My WorkSpace</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{{ url_for('base_new_form')}}">Create</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{{ url_for('base_new_form')}}">Share</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{{ url_for('base_new_form')}}">Results</a>
+                </li>
+            </ul>
+
+            <ul>
+                <li class="nav-item">
+                    <a class="btn btn-danger" type="submit" href="{{ url_for('home')}}">LogOut</a>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</nav>
+
+
+<!--  Sidebar navigation  -->
+<div class="card">
+    <div class="card-body">
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Editor</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Logic</a>
+            </li>
+        </ul>
+
+        <br/>
+
+        <!--  Add New Page  -->
+        <form action="{{ url_for('base_new_form') }}" method="POST">
+            <input type="submit" class="btn btn-info" name="new_page_button" value="Add New Page">
+        </form>
+        <br/>
+
+        <!--        <div class="container-fluid">-->
+        <!--            <div class="dropdown">-->
+        <form action="{{ url_for('base_new_form') }}" method="POST">
+            <select class="form-select" aria-label="Default select example" name="question_type"
+                    onchange="this.form.submit()">
+                {% if value == None %}
+                <option hidden disabled selected>Question Type</option>
+                {% else %}
+                {% set number = value | int %}
+                <option hidden disabled selected>{{ dictionary[number] }}</option>
+                {% endif %}
+                <option value="1">Multiple Choice</option>
+                <option value="2">Multiple Answers</option>
+                <option value="3">Phone Number</option>
+                <option value="4">Short Text</option>
+                <option value="5">Long Text</option>
+                <option value="6">Picture Multiple Choice</option>
+                <option value="7">Picture Multiple Answers</option>
+                <option value="8">Statement</option>
+                <option value="9">Yes/No</option>
+                <option value="10">Email</option>
+                <option value="11">Likert</option>
+                <option value="12">Rating</option>
+                <option value="13">Date</option>
+                <option value="14">Number</option>
+                <option value="15">Single Blanks</option>
+                <option value="16">Multiple Blanks</option>
+                <option value="17">Dropdown</option>
+                <option value="18">File Upload</option>
+                <option value="19">Website Link</option>
+            </select>
+        </form>
+        <h3>{{ value }}</h3>
+
+        <br/><br/><br/><br/>
+
+        <h4>Select Layout Type</h4>
+        <!-- Layout Dropdown -->
+        <form action="{{ url_for('base_new_form') }}" method="POST">
+            <select class="form-select" aria-label="Default select example" name="question_layout_type"
+                    onchange="this.form.submit()">
+                {% if layout_dropdown_value == None %}
+                <option hidden disabled selected>Layout Type</option>
+                {% elif layout_dropdown_value == "1" %}
+                <option hidden disabled selected>Horizontal</option>
+                {% elif layout_dropdown_value == "2" %}
+                <option hidden disabled selected>Vertical</option>
+                {% endif %}
+                <option value="1">Horizontal</option>
+                <option value="2">Vertical</option>
+            </select>
+        </form>
+
+
+        <br/><br/>
+        <h4>Details</h4>
+        <!-- Details Dropdown -->
+        <form action="{{ url_for('base_new_form') }}" method="POST">
+            <select class="form-select" aria-label="Default select example" name="details_type"
+                    onchange="this.form.submit()">
+                {% if details_dropdown_value == None %}
+                <option hidden disabled selected>Question Details Type</option>
+                {% elif details_dropdown_value == "1" %}
+                <option hidden disabled selected>Required</option>
+                {% elif details_dropdown_value == "2" %}
+                <option hidden disabled selected>Optional</option>
+                {% endif %}
+                <option value="1">Required</option>
+                <option value="2">Optional</option>
+            </select>
+        </form>
+
+        <!--        <form action="{{ url_for('base_new_form') }}" method="POST">-->
+        <!--            <div class="form-check form-switch">-->
+        <!--                <input name="layout_checkbox" class="form-check-input" type="checkbox" id="flexSwitchCheckDefault"-->
+        <!--                       onchange="this.form.submit()"/>-->
+        <!--                <label class="form-check-label" for="flexSwitchCheckDefault">Vertical Layout</label>-->
+        <!--            </div>-->
+        <!--        </form>-->
+
+
+        <!--        <h5 class="card-title">Card title</h5>-->
+        <!--        <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>-->
+        <!--        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's-->
+        <!--            content.</p>-->
+        <!--        <a href="#" class="card-link">Card link</a>-->
+        <!--        <a href="#" class="card-link">Another link</a>-->
+    </div>
+
+    {% if error_message %}
+    <h3>error_message</h3>
+    {% else %}
+    <div class={{ layout_type }}>
+        <div class={{ question_layout_type }}>
+            <form action="{{ url_for('base_new_form') }}" method="POST">
+                {{ question_form.csrf_token }}
+                <!--  Multiple Choice Question  -->
+                {% if number == 1 %}
+                <br/><br/><br/><br/><br/>
+                <h3>Page Under Construction</h3>
+
+                <!--  Multiple Answers  -->
+                {% elif number == 2 %}
+                <br/><br/><br/><br/><br/>
+                <h3>Page Under Construction</h3>
+
+                <!--  Phone Number Card  -->
+                {% elif number == 3 %}
+                <h5 class="card-title"><input type="text" class="form-control" id="question_phone_number"
+                                              aria-describedby="emailHelp" placeholder="Input Question Here"
+                                              name="question"/></h5>
+                <p class="card-text"><input type="text" class="form-control" id="description_phone_number"
+                                            aria-describedby="emailHelp" placeholder="Question Description (Optional)"
+                                            name="question_description"/></p>
+                <br/>
+                <input type="text" id="UserMobile" maxlength="10" data-fv-numeric="true"
+                       data-fv-numeric-message="Please enter valid phone numbers" data-fv-phone-country11="IN"
+                       required="required" data-fv-notempty-message="This field cannot be left blank."
+                       placeholder="Mobile No. " name="correct_answer"
+                       class="form-control" data-fv-field="data[User][mobile]">
+                <br/>
+                <input type="submit" class="btn btn-success" name="submit_button" value="Okay">
+
+
+                <!--  Short Text Card  -->
+                {% elif number == 4 %}
+                <h5 class="card-title"><input type="text" class="form-control" id="question_short_text"
+                                              aria-describedby="emailHelp" placeholder="Input Question Here"
+                                              name="question"/></h5>
+                <p class="card-text"><input type="text" class="form-control" id="description_short_text"
+                                            aria-describedby="emailHelp" placeholder="Question Description (Optional)"
+                                            name="question_description"/></p>
+                <p class="card-text"><input type="text" class="form-control" minlength="10" maxlength="144"
+                                            placeholder="Short answer of min 10 and max 144 characters"
+                                            name="correct_answer"/></p>
+                <input type="submit" class="btn btn-success" name="submit_button" value="Okay">
+
+
+                <!--  Long Text Card  -->
+                {% elif number == 5 %}
+                <h5 class="card-title"><input type="text" class="form-control" id="question_long_text"
+                                              aria-describedby="emailHelp" placeholder="Input Question Here"
+                                              name="question"/></h5>
+                <p class="card-text"><input type="text" class="form-control" id="description_long_text"
+                                            aria-describedby="emailHelp" placeholder="Question Description (Optional)"
+                                            name="question_description"/></p>
+                <p class="card-text"><input type="text" class="form-control" minlength="50" maxlength="500"
+                                            placeholder="Long answer of min 50 and max 500 characters"
+                                            name="correct_answer"/></p>
+                <input type="submit" class="btn btn-success" name="submit_button" value="Okay">
+
+
+                <!--  Picture Multiple Choice Question  -->
+                {% elif number == 6 %}
+                <br/><br/><br/><br/><br/>
+                <h3>Page Under Construction</h3>
+
+
+                <!--  Picture Multiple Answers  -->
+                {% elif number == 7 %}
+                <br/><br/><br/><br/><br/>
+                <h3>Page Under Construction</h3>
+
+
+                <!--  Statement Card  -->
+                {% elif number == 8 %}
+                <h5 class="card-title"><input type="text" class="form-control" id="question_statement"
+                                              aria-describedby="emailHelp" placeholder="Input Question Here"
+                                              name="question"/></h5>
+                <p class="card-text"><input type="text" class="form-control" id="description_statement"
+                                            aria-describedby="emailHelp" placeholder="Question Description (Optional)"
+                                            name="question_description"/></p>
+                <input type="submit" class="btn btn-success" name="submit_button" value="Continue">
+
+
+                <!-- Yes/No Card -->
+                {% elif number == 9 %}
+                <h5 class="card-title"><input type="text" class="form-control" id="question_binary"
+                                              aria-describedby="emailHelp" placeholder="Input Question Here"
+                                              name="question"/></h5>
+                <p class="card-text"><input type="text" class="form-control" id="description_binary"
+                                            aria-describedby="emailHelp" placeholder="Question Description (Optional)"
+                                            name="question_description"/></p>
+                <input type="submit" class="btn btn-success" name="submit_button" value="Yes">
+                <input type="submit" class="btn btn-danger" name="submit_button" value="No">
+
+
+                <!--  Email Card  -->
+                {% elif number == 10 %}
+                <h5 class="card-title"><input type="text" class="form-control" id="question_email"
+                                              aria-describedby="emailHelp" placeholder="Input Question Here"
+                                              name="question"/></h5>
+                <p class="card-text"><input type="text" class="form-control" id="description_email"
+                                            aria-describedby="emailHelp" placeholder="Question Description (Optional)"
+                                            name="question_description"/></p>
+                <label for="exampleInputEmail1">Email address</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                       placeholder="Enter email" name="correct_answer">
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
+                    else.</small>
+                <input type="submit" class="btn btn-success" name="submit_button" value="Okay">
+
+
+                <!--  Likert  -->
+                {% elif number == 11 %}
+                <h3>Page Under Construction</h3>
+
+
+                <!--  Rating Card  -->
+                {% elif number == 12 %}
+                <h5 class="card-title"><input type="text" class="form-control" id="question_rating"
+                                              aria-describedby="emailHelp" placeholder="Input Question Here"
+                                              name="question"/></h5>
+                <p class="card-text"><input type="text" class="form-control" id="description_rating"
+                                            aria-describedby="emailHelp" placeholder="Question Description (Optional)"
+                                            name="question_description"/></p>
+                <div class="rating"><input type="radio" name="rating" value="5" id="5"><label for="5">☆</label> <input
+                        type="radio" name="rating" value="4" id="4"><label for="4">☆</label> <input type="radio"
+                                                                                                    name="rating"
+                                                                                                    value="3"
+                                                                                                    id="3"><label
+                        for="3">☆</label> <input type="radio" name="rating" value="2" id="2"><label for="2">☆</label>
+                    <input
+                            type="radio" name="rating" value="1" id="1"><label for="1">☆</label>
+                </div>
+
+
+                <!--  Date Card  -->
+                {% elif number == 13 %}
+                <h5 class="card-title"><input type="text" class="form-control" id="question_date"
+                                              aria-describedby="emailHelp" placeholder="Input Question Here"
+                                              name="question"/></h5>
+                <p class="card-text"><input type="text" class="form-control" id="description_date"
+                                            aria-describedby="emailHelp" placeholder="Question Description (Optional)"
+                                            name="question_description"/></p>
+                <main class="container">
+                    <div class="row" style="padding-top: 100px">
+                        <div class="col">
+                            <input data-date-format="dd/mm/yyyy" id="datepicker">
+                        </div>
+                    </div>
+                </main>
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
+                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+                        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+                        crossorigin="anonymous"></script>
+                <style type="text/css">
+            /* solution 1:*/
+            .datepicker {
+                font-size: 0.875em;
+            }
+            /* solution 2: the original datepicker use 20px so replace with the following:
+            .datepicker td, .datepicker th {
+                width: 1.5em;
+                height: 1.5em;
+            }*/
+
+
+
+                </style>
+                <script type="text/javascript">
+        $('#datepicker').datepicker({
+            weekStart: 1,
+            daysOfWeekHighlighted: "6,0",
+            autoclose: true,
+            todayHighlight: true,
+        });
+        $('#datepicker').datepicker("setDate", new Date());
+
+
+                </script>
+
+
+                <!--  Number Card  -->
+                {% elif number == 14 %}
+                <h5 class="card-title"><input type="text" class="form-control" id="question_number"
+                                              aria-describedby="emailHelp" placeholder="Input Question Here"
+                                              name="question"/></h5>
+                <p class="card-text"><input type="text" class="form-control" id="description_number"
+                                            aria-describedby="emailHelp" placeholder="Question Description (Optional)"
+                                            name="question_description"/></p>
+                <p class="card-text"><input type="text" class="form-control" id="number"
+                                            aria-describedby="emailHelp" placeholder="Numeric Answer" name=name
+                                            value="{{first_name}}"></p>
+                <input type="submit" class="btn btn-success" name="submit_button" value="Okay">
+
+
+                <!--  Single Blank  -->
+                {% elif number == 15 %}
+                <br/><br/><br/><br/><br/>
+                <h3>Page Under Construction</h3>
+
+
+                <!--  Multiple Blanks  -->
+                {% elif number == 16 %}
+                <br/><br/><br/><br/><br/>
+                <h3>Page Under Construction</h3>
+
+
+                <!--  Dropdown  -->
+                {% elif number == 17 %}
+                <br/><br/><br/><br/><br/>
+                <h3>Page Under Construction</h3>
+
+
+                <!--  Upload File Card  -->
+                {% elif number == 18 %}
+                <h5 class="card-title"><input type="text" class="form-control" id="question_upload"
+                                              aria-describedby="emailHelp" placeholder="Input Question Here"
+                                              name="question"/></h5>
+                <p class="card-text"><input type="text" class="form-control" id="description_upload"
+                                            aria-describedby="emailHelp" placeholder="Question Description (Optional)"
+                                            name="question_description"/></p>
+                <form method=post enctype=multipart/form-data>
+                    <input type=file name=file>
+                    <input type=submit value=Upload>
+                </form>
+
+
+                <!--  Website Card  -->
+                {% elif number == 19 %}
+                <h5 class="card-title"><input type="text" class="form-control" id="question_website"
+                                              aria-describedby="emailHelp" placeholder="Input Question Here"
+                                              name="question"/></h5>
+                <p class="card-text"><input type="text" class="form-control" id="description_website"
+                                            aria-describedby="emailHelp" placeholder="Question Description (Optional)"
+                                            name="question_description"/></p>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Website Link</label>
+                    <input type="email" class="form-control" id="InputWebsite" aria-describedby="emailHelp"
+                           placeholder="https://">
+                </div>
+                <input type="submit" class="btn btn-success" name="submit_button" value="Okay">
+
+
+                {% else %}
+                <h5 class="card-title"><input type="text" class="form-control" id="question_"
+                                              aria-describedby="emailHelp" placeholder="Input Question Here"
+                                              name="question"/></h5>
+                <p class="card-text"><input type="text" class="form-control" id="description_"
+                                            aria-describedby="emailHelp" placeholder="Question Description (Optional)"
+                                            name="question_description"/></p>
+                <input type="submit" class="btn btn-success" name="submit_button" value="Okay">
+
+
+                {% endif %}
+            </form>
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+{% block content %}
+{% endblock %}
+
+</body>
+</html>

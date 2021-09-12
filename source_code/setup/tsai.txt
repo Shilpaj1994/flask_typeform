@@ -1,0 +1,15 @@
+1. What's your first name?
+	Shilpaj
+2. And your last name?
+	Bhalerao
+3. What's the main thing you'll be using TypeForm for?
+	Survey
+4. What industry are you in?
+	Automotive
+5. What size is your organization?
+	55
+6. Which of these best descrives your role?
+	Vp
+7. What's the one main activity you want to do with TypeForm?
+	Survey
+8. And how did you first discover Typeform?	Friend

@@ -1,0 +1,76 @@
+.cards {
+    margin-left: 100px;
+    max-width: 70%;
+    display: grid;
+    grid-template-column: repeat(3, 1fr);
+    gap: 20px;
+}
+.card-body {
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.7);
+  padding: 5px;
+  height: 100vh;
+}
+.card {
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
+    margin-left: 0px;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+
+/* Question Layouts for Horizontal and Vertical Type*/
+.question-body {
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.7);
+  padding: 15px;
+  height: 500px;
+}
+.question-vertical {
+  margin-left: 50%;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.7);
+  padding: 5px;
+  height: 500px;
+}
+
+
+/* Page Layout for Horizontal and Vertical Type*/
+.card-main {
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.7);
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    grid-column-start: 2;
+    grid-column-end: 4;
+    padding: 0px;
+    margin-top: 60px;
+    margin-bottom: 200px;
+    margin-right: 20px;
+
+    background-image: url("../images/background.jpeg"); /*Put your image url*/
+    background-repeat: no-repeat;
+    background-size: cover;  /* cover container*/
+    background-position: center center;
+    opacity: 0.75; /*Value from 0.0 to 1.0*/
+}
+.card-vertical {
+    box-shadow: 0 0 3px rgba(0, 0, 0, 0.7);
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    grid-column-start: 2;
+    grid-column-end: 4;
+    padding: 0px;
+    margin-top: 60px;
+    margin-bottom: 200px;
+    margin-right: 20px;
+
+    background-image: url("../images/background.jpeg"); /*Put your image url*/
+    background-repeat: no-repeat;
+    background-size: 50% 100%;
+    background-position: left center;
+    opacity: 0.75; /*Value from 0.0 to 1.0*/
+}
+
+
+

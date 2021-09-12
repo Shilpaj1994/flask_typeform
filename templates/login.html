@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<br/><br/>
+
+{% if message %}
+<h3>{{ message }}</h3>
+<form method="POST">
+    {{ form.csrf_token }}
+    {{ form.username.label(class="form-control") }}
+    {{ form.username }}
+    {{ form.password.label(class="form-control") }}
+    {{ form.password }}
+    <br/>
+    {{ form.submit(class="btn btn-primary") }}
+</form>
+
+{% else %}
+<form method="POST">
+    {{ form.csrf_token }}
+    {{ form.username.label(class="form-control") }}
+    {{ form.username }}
+    {{ form.password.label(class="form-control") }}
+    {{ form.password }}
+    <br/>
+    {{ form.submit(class="btn btn-primary") }}
+</form>
+
+{% endif %}
+
+{% endblock %}
